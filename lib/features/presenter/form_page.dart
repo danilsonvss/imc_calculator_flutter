@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:imc_calculator/calculator.dart';
+import 'package:imc_calculator/features/domain/entities/calculator.dart';
 
-class CalculatorForm extends StatefulWidget {
-  const CalculatorForm({Key? key}) : super(key: key);
+class FormPage extends StatefulWidget {
+  const FormPage({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _CalculatorState();
+  State<StatefulWidget> createState() => _FormPageState();
 }
 
-class _CalculatorState extends State<CalculatorForm>
+class _FormPageState extends State<FormPage>
     with TickerProviderStateMixin {
   final _formKey = GlobalKey<FormState>();
   final _heightController = TextEditingController();
   final _weightController = TextEditingController();
-  final _pageController = PageController();
 
   late final AnimationController _controller = AnimationController(
-    duration: const Duration(seconds: 5),
+    duration: const Duration(seconds: 2),
     vsync: this,
   )..forward();
 
@@ -71,9 +70,18 @@ class _CalculatorState extends State<CalculatorForm>
                   const Padding(
                     padding: EdgeInsets.only(bottom: 16.0),
                     child: Text(
-                      "Calcular IMC",
+                      "IMC",
                       style: TextStyle(
                         fontSize: 28.0,
+                      ),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 16.0),
+                    child: Text(
+                      "Índice de Massa Corporal",
+                      style: TextStyle(
+                        fontSize: 16.0,
                       ),
                     ),
                   ),
@@ -133,7 +141,7 @@ class _CalculatorState extends State<CalculatorForm>
                         if (_formKey.currentState!.validate()) {
                           var height = double.parse(_heightController.text);
                           var weight = double.parse(_weightController.text);
-                          var imc = Calculator(height, weight).imc;
+                          var imc = Calculator(height, weight).result;
 
                           Map<String, double> args = {'imc': imc};
                           Navigator.pushNamed(

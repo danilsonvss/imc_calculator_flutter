@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:imc_calculator/calculator_form.dart';
-import 'package:imc_calculator/calculator_result.dart';
+import 'package:imc_calculator/features/presenter/form_page.dart';
+import 'package:imc_calculator/features/presenter/result_page.dart';
 
 void main() {
   runApp(const App());
@@ -28,8 +28,8 @@ class App extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => const CalculatorForm(),
-        '/result': (context) => const CalculatorResult(),
+        '/': (context) => const FormPage(),
+        '/result': (context) => const ResultPage(),
       },
     );
   }
